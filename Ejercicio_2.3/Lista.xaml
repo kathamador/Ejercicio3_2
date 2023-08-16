@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Ejercicio_2ultimoparcial.Lista"
+    xmlns:viewModel="clr-namespace:Ejercicio_2ultimoparcial"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    
+    <ContentPage.BindingContext>
+        <viewModel:MainViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Behaviors>
+        <xct:EventToCommandBehavior  
+         EventName="Appearing"
+         Command="{Binding LoadDataCommand}"/>
+    </ContentPage.Behaviors>
+
+    <StackLayout>
+        <RefreshView
+            IsRefreshing="{Binding IsBusy}"
+             Command="{Binding LoadDataCommand}">
+            <CollectionView
+                SelectionMode="Single"
+                SelectedItem="{Binding EditingAlumno}"
+                ItemsSource="{Binding People}" VerticalOptions="FillAndExpand"  x:Name="Lista2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" Orientation="Horizontal">
+                            <Image Source="{Binding Image}" WidthRequest="50" HeightRequest="20" />
+                            <StackLayout>
+                                <Label Text="{Binding Id}" />
+                                <Label Text="{Binding Nombre}" />
+                                <Label Text="{Binding Apellido}" />
+                                <Label Text="{Binding Sexo}" />
+                                <Label Text="{Binding Direccion}" />
+                                <Button Text="Eliminar" Command="{Binding BindingContext.DeleteAlumnoCommand, Source={x:Reference Lista2}}" CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <Label Text="Selecciona un objeto de la lista para editar" />
+        <Entry Placeholder="Id" Text="{Binding EditingAlumno.Id}" />
+        <Entry Placeholder="Nombre" Text="{Binding EditingAlumno.Nombre}" />
+        <Entry Placeholder="Apellido" Text="{Binding EditingAlumno.Apellido}"  />
+        <Entry Placeholder="Sexo" Text="{Binding EditingAlumno.Sexo}"  />
+        <Entry Placeholder="Direccion" Text="{Binding EditingAlumno.Direccion}"   />
+        <Button IsEnabled="{Binding IsAlumnoSeleccionado}" Text="Guardar cambios" Command="{Binding BindingContext.SaveEditedAlumnoCommand, Source={x:Reference Lista2}}" CommandParameter="{Binding .}"/>
+
+    </StackLayout>
+  
+</ContentPage>

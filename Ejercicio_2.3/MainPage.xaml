@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Ejercicio_2._3.MainPage"
+             xmlns:local="clr-namespace:Ejercicio_2ultimoparcial"
+              xmlns:viewModel="clr-namespace:Ejercicio_2ultimoparcial">
+
+    <ContentPage.BindingContext>
+        <viewModel:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Image BackgroundColor="#ddd" HorizontalOptions="Center" x:Name="foto" WidthRequest="200" HeightRequest="200" Source="{Binding Image}" />
+        <Button Text="Seleccionar imagen desde galeria" Command="{Binding SelectImageCommand}" />
+        <Button  Text="Tomar Foto" Command="{Binding TakeImageCommand}" />
+        
+        <!--<Button  Text="Tomar Foto" Clicked="btntomarfoto_Clicked" />-->
+        
+        <Entry Placeholder="Id" Text="{Binding Id}" />
+        <Entry Placeholder="Nombre" Text="{Binding Nombre}" />
+        <Entry Placeholder="Apellido" Text="{Binding Apellido}"  />
+        <Entry Placeholder="Sexo" Text="{Binding Sexo}"  />
+        <Entry Placeholder="Direccion" Text="{Binding Direccion}"   />
+        <Button Text="Agregar Registro" Command="{Binding InsertCommand2}"/>
+        <Button Text="Ver lista" Clicked="btnverlista_Clicked"/>
+    </StackLayout>
+      
+</ContentPage>
